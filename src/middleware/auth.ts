@@ -19,6 +19,14 @@ export function isAuthenticated(
     next({ name: "Home", params: { email: email } });
   }
 
+  if (token && to.path === "/register") {
+    next({ name: "Home", params: { email: email } });
+  }
+  //register
+  if (!token && to.path === "/register") {
+    next();
+  }
+
   if (!token && to.path !== "/login") {
     next({ name: "Login" });
   }

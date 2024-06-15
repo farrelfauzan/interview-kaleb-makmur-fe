@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import LoginPage from "../components/LoginPage.vue";
 import HomePage from "../components/HomePage.vue";
+import RegisterPage from "../components/RegisterPage.vue";
 import { isAuthenticated } from "@/middleware/auth";
 
 const routes: Array<RouteRecordRaw> = [
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/home/:email",
     name: "Home",
     component: HomePage,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: RegisterPage,
   },
   { path: "/", redirect: "/login" },
 ];
