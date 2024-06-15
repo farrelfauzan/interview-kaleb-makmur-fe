@@ -1,8 +1,8 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { Api } from "../swagger/api";
 
 const api = new Api({
-  baseURL: process.env.API_URL || "http://localhost:3005",
+  baseURL: process.env.VUE_APP_API_URL || "http://localhost:3005",
   headers: {
     "Content-Type": "application/json",
     // Add any headers you need for all requests
@@ -41,3 +41,5 @@ api.instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export default api;

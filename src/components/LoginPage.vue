@@ -2,8 +2,8 @@
   <div>
     <h2>Login Page</h2>
     <form @submit.prevent="login">
-      <label for="username">Username:</label>
-      <input type="text" id="username" v-model="username" required />
+      <label for="email">Email:</label>
+      <input type="text" id="email" v-model="email" required />
       <br />
       <label for="password">Password:</label>
       <input type="password" id="password" v-model="password" required />
@@ -15,19 +15,29 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import api from "../../plugins/service";
 
 export default defineComponent({
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
     };
   },
   methods: {
-    login() {
-      console.log("Username:", this.username);
-      console.log("Password:", this.password);
-      // Implement login logic here
+    async login() {
+      try {
+        const { email, password } = this;
+        const response = await api.auth.authControllerLogin({
+          email,
+          password,
+        });
+        localStorage.setItem("token", response.data.bearerToken);
+        localStorage.setItem("email", response.data.user.email);
+        this.$router.replace(`/home/${email}`);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });

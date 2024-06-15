@@ -1,3 +1,5 @@
+// middleware/isAuthenticated.ts
+
 import {
   NavigationGuardNext,
   RouteLocationNormalized,
@@ -10,11 +12,16 @@ export function isAuthenticated(
   next: NavigationGuardNext
 ): void {
   const token = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
   console.log("token", token);
 
-  if (token) {
-    next();
-  } else {
-    next("/login");
+  if (token && to.path === "/login") {
+    next({ name: "Home", params: { email: email } });
   }
+
+  if (!token && to.path !== "/login") {
+    next({ name: "Login" });
+  }
+
+  next();
 }

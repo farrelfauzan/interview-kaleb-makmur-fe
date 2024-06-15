@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import LoginPage from "../components/LoginPage.vue";
 import HomePage from "../components/HomePage.vue";
+import { isAuthenticated } from "@/middleware/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,10 +10,9 @@ const routes: Array<RouteRecordRaw> = [
     component: LoginPage,
   },
   {
-    path: "/home",
+    path: "/home/:email",
     name: "Home",
     component: HomePage,
-    meta: { requiresAuth: true },
   },
   { path: "/", redirect: "/login" },
 ];
@@ -21,5 +21,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach(isAuthenticated);
 
 export default router;
