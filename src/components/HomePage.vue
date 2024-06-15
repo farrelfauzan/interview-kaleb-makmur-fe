@@ -19,6 +19,9 @@
           Email: {{ userData.email }}
         </p>
         <p class="text-gray-700 dark:text-gray-300">
+          Username: {{ userData.username }}
+        </p>
+        <p class="text-gray-700 dark:text-gray-300">
           First Name: {{ userData.firstName }}
         </p>
         <p class="text-gray-700 dark:text-gray-300">
