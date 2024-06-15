@@ -61,6 +61,7 @@ export default defineComponent({
 
     function logout() {
       localStorage.removeItem("token");
+      localStorage.removeItem("email");
     }
 
     onBeforeMount(() => {
